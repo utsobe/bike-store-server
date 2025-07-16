@@ -38,4 +38,13 @@ const productValidationSchema = z.object({
     .default(true),
 });
 
+// Schema for creating a product (without inStock field required)
+const createProductValidationSchema = productValidationSchema.omit({
+  inStock: true,
+});
+
+// Schema for updating a product (all fields optional)
+const updateProductValidationSchema = productValidationSchema.partial();
+
 export default productValidationSchema;
+export { createProductValidationSchema, updateProductValidationSchema };
