@@ -6,7 +6,6 @@ const createOrder = async (req: Request, res: Response) => {
   try {
     const orderData = req.body;
 
-    // Validate the order data using Zod
     const zodParsedData = orderValidationSchema.parse(orderData);
 
     const result = await OrderService.createOrderIntoDB(zodParsedData);
@@ -17,7 +16,6 @@ const createOrder = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    // Handle specific error cases
     if (error.message.includes('Product not found')) {
       return res.status(404).json({
         message: 'Product not found',
@@ -47,9 +45,7 @@ const createOrder = async (req: Request, res: Response) => {
 
 const getTotalRevenue = async (req: Request, res: Response) => {
   try {
-    // Logic to calculate total revenue can be added here
     const totalRevenue = await OrderService.getTotalRevenueFromDB();
-    // For now, returning a placeholder response
     res.status(200).json({
       message: 'Revenue calculated successfully',
       status: true,
