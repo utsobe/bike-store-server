@@ -48,6 +48,12 @@ const getProductById = async (req: Request, res: Response) => {
     const { productId } = req.params;
     const result = await ProductService.getProductByIdFromDB(productId);
     console.log(productId);
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: 'Bike not found',
+      });
+    }
     res.status(200).json({
       success: true,
       message: 'Bike retrieved successfully',
@@ -96,10 +102,36 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 
+const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const { productId } = req.params;
+    const result = await ProductService.deleteProductFromDB(productId);
+
+    if (!result) {
+      return res.status(404).json({
+        success: false,
+        message: 'Bike not found',
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Bike deleted successfully',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(400).json({
+      success: false,
+      message: error.message || 'Failed to delete bike',
+      error: error,
+    });
+  }
+};
+
 export const ProductController = {
   createProduct,
   getAllProducts,
   getProductById,
   updateProduct,
-  // deleteProduct,
+  deleteProduct,
 };

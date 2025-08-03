@@ -29,10 +29,19 @@ const updateProductFromDB = async (
   return result;
 };
 
+const deleteProductFromDB = async (
+  productId: string,
+): Promise<TProduct | null> => {
+  const result = await Product.findByIdAndUpdate(productId, {
+    isDeleted: true,
+  });
+  return result;
+};
+
 export const ProductService = {
   createProductIntoDB,
   getAllProductsFromDB,
   getProductByIdFromDB,
   updateProductFromDB,
-  // deleteProduct,
+  deleteProductFromDB,
 };

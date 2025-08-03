@@ -1,5 +1,4 @@
 import { z } from 'zod';
-import de from 'zod/v4/locales/de.cjs';
 
 // Zod schema for product validation
 const productValidationSchema = z.object({
@@ -36,6 +35,10 @@ const productValidationSchema = z.object({
     .boolean({ message: 'inStock must be a boolean' })
     .optional()
     .default(true),
+  isDeleted: z
+    .boolean({ message: 'isDeleted must be a boolean' })
+    .optional()
+    .default(false),
 });
 
 // Schema for creating a product (without inStock field required)
