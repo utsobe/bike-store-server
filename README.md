@@ -2,59 +2,34 @@
 
 A comprehensive RESTful API for managing a bike store inventory and orders system. Built with Node.js, Express, TypeScript, MongoDB, and Zod validation.
 
+## 🌐 Live Demo
+
+**Production URL**: [https://bike-store-server-teal.vercel.app/](https://bike-store-server-teal.vercel.app/)
+
 ## 📋 Table of Contents
 
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [API Endpoints](#api-endpoints)
-- [Installation](#installation)
-- [Environment Variables](#environment-variables)
-- [Usage](#usage)
+- [Quick Start](#quick-start)
 - [API Documentation](#api-documentation)
-- [Project Structure](#project-structure)
+- [Environment Variables](#environment-variables)
 - [Scripts](#scripts)
-- [Contributing](#contributing)
 
 ## ✨ Features
 
-### 🛒 Product Management
-
-- **Create Products**: Add new bikes to inventory with comprehensive validation
-- **View Products**: Get all products or specific product by ID
-- **Update Products**: Modify product details with partial updates
-- **Delete Products**: Soft delete products (sets `isDeleted: true`)
-- **Inventory Tracking**: Real-time stock management
-
-### 📦 Order Management
-
-- **Place Orders**: Create orders with automatic inventory management
-- **Stock Validation**: Prevents overselling with real-time stock checks
-- **Automatic Updates**: Auto-updates product quantities and stock status
-- **Email Integration**: Customer email tracking for orders
-
-### 🔒 Data Validation
-
-- **Zod Schemas**: Comprehensive input validation for all endpoints
-- **Type Safety**: Full TypeScript implementation
-- **Error Handling**: Detailed error messages and status codes
-
-### 🗄️ Database Features
-
-- **MongoDB Integration**: Efficient NoSQL database operations
-- **Mongoose ODM**: Schema validation and data modeling
-- **Timestamps**: Automatic createdAt and updatedAt tracking
-- **Soft Deletes**: Products marked as deleted rather than removed
+- 🛒 **Product Management**: CRUD operations with validation and soft delete
+- 📦 **Order System**: Automatic inventory management with stock validation
+- 🔒 **Type Safety**: Full TypeScript + Zod validation
+- 🗄️ **MongoDB**: Efficient NoSQL operations with Mongoose ODM
+- 📊 **Revenue Tracking**: Calculate total revenue from all orders
 
 ## 🛠️ Tech Stack
 
-- **Runtime**: Node.js
-- **Framework**: Express.js
-- **Language**: TypeScript
-- **Database**: MongoDB
-- **ODM**: Mongoose
-- **Validation**: Zod
-- **Code Quality**: ESLint, Prettier
-- **Development**: ts-node-dev
+**Backend**: Node.js, Express.js, TypeScript  
+**Database**: MongoDB, Mongoose ODM  
+**Validation**: Zod  
+**Tools**: ESLint, Prettier, ts-node-dev
 
 ## 🚀 API Endpoints
 
@@ -70,122 +45,65 @@ A comprehensive RESTful API for managing a bike store inventory and orders syste
 
 ### Orders
 
-| Method | Endpoint      | Description                                |
-| ------ | ------------- | ------------------------------------------ |
-| POST   | `/api/orders` | Create new order with inventory management |
+| Method | Endpoint              | Description                            |
+| ------ | --------------------- | -------------------------------------- |
+| POST   | `/api/orders`         | Create order with inventory management |
+| GET    | `/api/orders/revenue` | Get total revenue                      |
 
-## 📥 Installation
+## � Quick Start
 
 ### Prerequisites
 
-- Node.js (v14 or higher)
-- MongoDB (v4.4 or higher)
-- npm or yarn
+- Node.js (v14+)
+- MongoDB (v4.4+)
 
-### Step-by-step Setup
+### Setup
 
-1. **Clone the repository**
+```bash
+# Clone repository
+git clone https://github.com/utsobe/bike-store-server.git
+cd bike-store-server
 
-   ```bash
-   git clone https://github.com/yourusername/bike-store-server.git
-   cd bike-store-server
-   ```
+# Install dependencies
+npm install
 
-2. **Install dependencies**
+# Set environment variables
+cp .env.example .env
+# Edit .env with your MongoDB URL
 
-   ```bash
-   npm install
-   ```
+# Run development server
+npm run start:dev
+```
 
-3. **Set up environment variables**
+### Test the API
 
-   ```bash
-   cp .env.example .env
-   ```
-
-   Edit the `.env` file with your configuration (see [Environment Variables](#environment-variables))
-
-4. **Start MongoDB**
-   - Make sure MongoDB is running on your system
-   - Default connection: `mongodb://localhost:27017`
-
-5. **Run the application**
-
-   **Development mode:**
-
-   ```bash
-   npm run start:dev
-   ```
-
-   **Production mode:**
-
-   ```bash
-   npm run build
-   npm run start:prod
-   ```
-
-6. **Verify installation**
-   Open your browser and navigate to `http://localhost:3000`
-   You should see: "App is running!"
+Visit: `http://localhost:3000` - You should see "App is running!"
 
 ## 🔧 Environment Variables
 
-Create a `.env` file in the root directory:
-
 ```env
-# Server Configuration
 PORT=3000
-
-# Database Configuration
 DATABASE_URL=mongodb://localhost:27017/bike-store
-
-# Security (if needed for future features)
 BCRYPT_SALT_ROUNDS=12
 ```
 
-### Environment Variables Description
+## 📜 Scripts
 
-| Variable             | Description                             | Default                              |
-| -------------------- | --------------------------------------- | ------------------------------------ |
-| `PORT`               | Server port number                      | 3000                                 |
-| `DATABASE_URL`       | MongoDB connection string               | mongodb://localhost:27017/bike-store |
-| `BCRYPT_SALT_ROUNDS` | Bcrypt salt rounds for password hashing | 12                                   |
+| Script               | Description                              |
+| -------------------- | ---------------------------------------- |
+| `npm run start:dev`  | Start development server with hot reload |
+| `npm run start:prod` | Start production server                  |
+| `npm run build`      | Build TypeScript to JavaScript           |
+| `npm run lint`       | Run ESLint                               |
+| `npm run lint:fix`   | Fix ESLint errors automatically          |
 
-## 💡 Usage
+---
 
-### Creating a Product
+**🚴‍♂️ Happy Coding! Built with ❤️ using Node.js & TypeScript**
 
-```bash
-POST /api/products/create-product
-Content-Type: application/json
+## API Documentation
 
-{
-  "name": "Trek Mountain Explorer 2024",
-  "brand": "Trek",
-  "price": 1299.99,
-  "category": "Mountain",
-  "description": "A high-performance mountain bike designed for rugged terrain",
-  "quantity": 15
-}
-```
-
-### Placing an Order
-
-```bash
-POST /api/orders
-Content-Type: application/json
-
-{
-  "email": "customer@example.com",
-  "product": "productId",
-  "quantity": 2,
-  "totalPrice": 2599.98
-}
-```
-
-## 📚 API Documentation
-
-### Product Schema
+### 🛒 Product Schema
 
 ```typescript
 {
@@ -195,12 +113,12 @@ Content-Type: application/json
   category: 'Mountain' | 'Road' | 'Hybrid' | 'Electric';
   description: string; // Product description
   quantity: number; // Stock quantity (integer)
-  inStock: boolean; // Automatically managed
+  inStock: boolean; // Auto-managed
   isDeleted: boolean; // Soft delete flag
 }
 ```
 
-### Order Schema
+### 📦 Order Schema
 
 ```typescript
 {
@@ -211,9 +129,35 @@ Content-Type: application/json
 }
 ```
 
-### Response Format
+### 📝 Example Usage
 
-**Success Response:**
+**Create Product:**
+
+```bash
+POST /api/products/create-product
+{
+  "name": "Trek Mountain Explorer 2024",
+  "brand": "Trek",
+  "price": 1299.99,
+  "category": "Mountain",
+  "description": "High-performance mountain bike",
+  "quantity": 15
+}
+```
+
+**Place Order:**
+
+```bash
+POST /api/orders
+{
+  "email": "customer@example.com",
+  "product": "productId",
+  "quantity": 2,
+  "totalPrice": 2599.98
+}
+```
+
+### 📊 Response Format
 
 ```json
 {
@@ -221,50 +165,6 @@ Content-Type: application/json
   "status": true,
   "data": { ... }
 }
-```
-
-**Error Response:**
-
-```json
-{
-  "message": "Error description",
-  "status": false,
-  "error": "Error details"
-}
-```
-
-## 📁 Project Structure
-
-```
-bike-store-server/
-├── src/
-│   ├── app/
-│   │   ├── config/
-│   │   │   └── index.ts          # Environment configuration
-│   │   └── modules/
-│   │       ├── product/
-│   │       │   ├── product.controller.ts
-│   │       │   ├── product.interface.ts
-│   │       │   ├── product.model.ts
-│   │       │   ├── product.route.ts
-│   │       │   ├── product.service.ts
-│   │       │   └── product.validation.ts
-│   │       └── order/
-│   │           ├── order.controller.ts
-│   │           ├── order.interface.ts
-│   │           ├── order.model.ts
-│   │           ├── order.route.ts
-│   │           ├── order.service.ts
-│   │           └── order.validation.ts
-│   ├── app.ts                    # Express app configuration
-│   └── server.ts                 # Server entry point
-├── dist/                         # Compiled JavaScript files
-├── .env                          # Environment variables
-├── .gitignore
-├── eslint.config.mjs            # ESLint configuration
-├── package.json
-├── tsconfig.json                # TypeScript configuration
-└── README.md
 ```
 
 ## 📜 Scripts
