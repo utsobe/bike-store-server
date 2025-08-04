@@ -236,26 +236,6 @@ POST /api/orders
 - Write meaningful commit messages
 - Add comments for complex logic
 
-## 📝 License
-
-This project is licensed under the ISC License.
-
-## 🐛 Issue Reporting
-
-If you find any bugs or have feature requests, please create an issue on GitHub with:
-
-- Clear description of the problem
-- Steps to reproduce
-- Expected vs actual behavior
-- Environment details
-
-## 📞 Support
-
-For support and questions:
-
-- Create an issue on GitHub
-- Email: your-email@example.com
-
 ---
 
 **Happy Coding! 🚴‍♂️✨**
